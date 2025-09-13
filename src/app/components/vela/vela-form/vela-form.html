@@ -1,0 +1,29 @@
+<h2>Cadastro de Vela</h2>
+<form (ngSubmit)="onSubmit()" #velaForm="ngForm">
+  <div>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" [(ngModel)]="vela.nome" required>
+  </div>
+
+  <div>
+    <label for="fragrancia">Fragrância:</label>
+    <input type="text" id="fragrancia" name="fragrancia" [(ngModel)]="vela.fragrancia" required>
+  </div>
+
+  <div>
+    <label for="tamanho">Tamanho:</label>
+    <input type="text" id="tamanho" name="tamanho" [(ngModel)]="vela.tamanho" required>
+  </div>
+
+  <div>
+    <label for="preco">Preço:</label>
+    <input type="number" id="preco" name="preco" [(ngModel)]="vela.preco" step="0.01" required>
+  </div>
+
+  <div>
+    <label for="quantidadeEstoque">Quantidade em Estoque:</label>
+    <input type="number" id="quantidadeEstoque" name="quantidadeEstoque" [(ngModel)]="vela.quantidadeEstoque" required>
+  </div>
+
+  <button type="submit" [disabled]="!velaForm.valid">Cadastrar</button>
+</form>

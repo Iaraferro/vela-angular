@@ -1,0 +1,29 @@
+<h2>Cadastro de Cliente</h2>
+<form (ngSubmit)="onSubmit()" #clienteForm="ngForm">
+  <div>
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" [(ngModel)]="cliente.nome" required>
+  </div>
+
+  <div>
+    <label for="cpf">CPF:</label>
+    <input type="text" id="cpf" name="cpf" [(ngModel)]="cliente.cpf" required>
+  </div>
+
+  <div>
+    <label for="telefone">Telefone:</label>
+    <input type="text" id="telefone" name="telefone" [(ngModel)]="cliente.telefone" required>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="cliente.email" required>
+  </div>
+
+  <div>
+    <label for="endereco">Endereço:</label>
+    <textarea id="endereco" name="endereco" [(ngModel)]="cliente.endereco" required></textarea>
+  </div>
+
+  <button type="submit" [disabled]="!clienteForm.valid">Cadastrar Cliente</button>
+</form>
