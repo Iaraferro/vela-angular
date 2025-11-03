@@ -1,8 +1,11 @@
 export class Vela {
   id!: number;
   nome!: string;
-  fragrancia!: string;
-  tamanho!: string;
+  tipo!: string;
+  aroma!: string;
   preco!: number;
-  quantidadeEstoque!: number;
+  ingrediente?: string;
+  ritualAssociado?: string;
+  estoque!: number;
+  disponivel?: boolean;
 }

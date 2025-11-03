@@ -11,7 +11,7 @@ export class FornecedorService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createFornecedor(fornecedor: FornecedorService): Observable<Fornecedor> {
+  createFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
     return this.httpClient.post<Fornecedor>(this.baseUrl, fornecedor);
   }
 

@@ -1,0 +1,77 @@
+<nav class="sidebar" [class.sidebar-closed]="!(isOpen$ | async)">
+  <div class="sidebar-header">
+    <h3>Menu</h3>
+  </div>
+  <ul class="sidebar-menu">
+    <li>
+      <a routerLink="/admin/velas" routerLinkActive="active">
+        <span class="material-icons">candle</span>
+        <span class="menu-text">Velas</span>
+      </a>
+      <!-- Botão para nova vela -->
+      <button 
+          mat-icon-button 
+          routerLink="/admin/velas/novo"
+          class="add-button"
+          title="Nova Vela">
+        <span class="material-icons">add</span>
+      </button>
+    </li>
+    <li>
+      <a routerLink="/admin/clientes" routerLinkActive="active">
+        <span class="material-icons">people</span>
+        <span class="menu-text">Clientes</span>
+      </a>
+      <!-- Botão para novo cliente -->
+      <button 
+          mat-icon-button 
+          routerLink="/admin/clientes/novo"
+          class="add-button"
+          title="Novo Cliente">
+        <span class="material-icons">add</span>
+      </button>
+    </li>
+    <li>
+      <a routerLink="/admin/fornecedores" routerLinkActive="active">
+        <span class="material-icons">business</span>
+        <span class="menu-text">Fornecedores</span>
+      </a>
+      <!-- Botão para novo fornecedor -->
+      <button 
+          mat-icon-button 
+          routerLink="/admin/fornecedores/novo"
+          class="add-button"
+          title="Novo Fornecedor">
+        <span class="material-icons">add</span>
+      </button>
+    </li>
+    <li>
+      <a routerLink="/admin/ingredientes" routerLinkActive="active">
+        <span class="material-icons">science</span>
+        <span class="menu-text">Ingredientes</span>
+      </a>
+      <!-- Botão para novo ingrediente -->
+      <button 
+          mat-icon-button 
+          routerLink="/admin/ingredientes/novo"
+          class="add-button"
+          title="Novo Ingrediente">
+        <span class="material-icons">add</span>
+      </button>
+    </li>
+    <li>
+      <a routerLink="/admin/aromas" routerLinkActive="active">
+        <span class="material-icons">aroma</span>
+        <span class="menu-text">Aromas</span>
+      </a>
+      <!-- Botão para novo aroma -->
+      <button 
+          mat-icon-button 
+          routerLink="/admin/aromas/novo"
+          class="add-button"
+          title="Novo Aroma">
+        <span class="material-icons">add</span>
+      </button>
+    </li>
+  </ul>
+</nav>

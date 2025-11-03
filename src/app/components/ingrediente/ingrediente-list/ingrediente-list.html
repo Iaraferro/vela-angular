@@ -1,0 +1,56 @@
+<div class="container">
+  <h2>Lista de Ingredientes</h2>
+  
+  <div class="mb-3">
+    <a routerLink="/admin/ingredientes/novo" class="btn btn-primary">
+      Novo Ingrediente
+    </a>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="alert alert-info">
+    Carregando ingredientes...
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <!-- Tabela de ingredientes -->
+  <div *ngIf="!loading && !error">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Pavio</th>
+          <th>Recipiente</th>
+          <th>Tipo de Cera</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ingrediente of ingredientes">
+          <td>{{ ingrediente.id }}</td>
+          <td>{{ ingrediente.pavio }}</td>
+          <td>{{ ingrediente.recipiente }}</td>
+          <td>{{ ingrediente.tipoCera }}</td>
+          <td>
+            <a [routerLink]="['/ingredientes/editar', ingrediente.id]" 
+               class="btn btn-sm btn-warning me-1">
+              Editar
+            </a>
+            <button (click)="excluirIngrediente(ingrediente.id!)" 
+                    class="btn btn-sm btn-danger">
+              Excluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="ingredientes.length === 0" class="alert alert-warning">
+      Nenhum ingrediente encontrado.
+    </div>
+  </div>
+</div>

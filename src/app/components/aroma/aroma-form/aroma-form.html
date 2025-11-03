@@ -1,0 +1,64 @@
+<div class="container">
+  <h2>{{ isEdit ? 'Editar Aroma' : 'Novo Aroma' }}</h2>
+  
+  <!-- Loading -->
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+  <!-- Error -->
+  <mat-card *ngIf="error" class="error-card">
+    <mat-card-content>
+      <mat-icon color="warn">error</mat-icon>
+      {{ error }}
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Formulário -->
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form (ngSubmit)="salvar()" #aromaForm="ngForm">
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Essência Aromática *</mat-label>
+          <input 
+            matInput
+            type="text" 
+            id="essenciaAromatica" 
+            name="essenciaAromatica"
+            [(ngModel)]="aroma.essenciaAromatica" 
+            required
+            minlength="2"
+            placeholder="Digite a essência aromática">
+          <mat-icon matSuffix>aroma</mat-icon>
+          <mat-hint>Ex: Lavanda, Baunilha, Limão</mat-hint>
+          <mat-error *ngIf="aromaForm.controls['essenciaAromatica']?.hasError('required')">
+            Essência aromática é obrigatória
+          </mat-error>
+          <mat-error *ngIf="aromaForm.controls['essenciaAromatica']?.hasError('minlength')">
+            Mínimo 2 caracteres
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button 
+            type="button" 
+            mat-stroked-button 
+            color="basic" 
+            routerLink="/aromas"
+            class="btn-cancel">
+            <mat-icon>arrow_back</mat-icon>
+            Cancelar
+          </button>
+          <button 
+            type="submit" 
+            mat-raised-button 
+            color="primary"
+            [disabled]="!aromaForm.form.valid || loading"
+            class="btn-submit">
+            <mat-icon>{{ isEdit ? 'update' : 'save' }}</mat-icon>
+            {{ isEdit ? 'Atualizar' : 'Salvar' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

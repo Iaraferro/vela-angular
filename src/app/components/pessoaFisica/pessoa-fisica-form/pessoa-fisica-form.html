@@ -1,0 +1,28 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Nova Pessoa Física</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="pessoaForm" (ngSubmit)="salvar()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" placeholder="Digite o nome">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>CPF</mat-label>
+          <input matInput formControlName="cpf" placeholder="Digite o CPF">
+        </mat-form-field>
+
+        <div class="actions">
+          <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!pessoaForm.valid">
+            Salvar
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

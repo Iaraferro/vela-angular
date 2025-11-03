@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>{{ isEdit ? 'Editar' : 'Novo' }} Ingrediente</h2>
+  
+  <!-- Loading -->
+  <div *ngIf="loading" class="alert alert-info">
+    {{ isEdit ? 'Carregando...' : 'Salvando...' }}
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <!-- Formulário -->
+  <form (ngSubmit)="onSubmit()" #ingredienteForm="ngForm">
+    <div class="mb-3">
+      <label for="pavio" class="form-label">Pavio *</label>
+      <input type="text" class="form-control" id="pavio" 
+             [(ngModel)]="ingrediente.pavio" name="pavio" 
+             required minlength="2">
+    </div>
+
+    <div class="mb-3">
+      <label for="recipiente" class="form-label">Recipiente *</label>
+      <input type="text" class="form-control" id="recipiente" 
+             [(ngModel)]="ingrediente.recipiente" name="recipiente" 
+             required minlength="2">
+    </div>
+
+    <div class="mb-3">
+      <label for="tipoCera" class="form-label">Tipo de Cera *</label>
+      <input type="text" class="form-control" id="tipoCera" 
+             [(ngModel)]="ingrediente.tipoCera" name="tipoCera" 
+             required minlength="2">
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary" 
+              [disabled]="!ingredienteForm.form.valid || loading">
+        {{ isEdit ? 'Atualizar' : 'Salvar' }}
+      </button>
+      <a routerLink="/ingredientes" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
+</div>

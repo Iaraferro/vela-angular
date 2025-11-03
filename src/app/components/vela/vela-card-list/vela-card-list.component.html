@@ -1,0 +1,112 @@
+<div class="ecommerce-container">
+  <!-- Header do E-commerce -->
+  <header class="ecommerce-header">
+    <div class="header-content">
+      <h1 class="store-title">Loja de Velas Aromáticas</h1>
+      <p class="store-subtitle">Encontre a vela perfeita para cada momento</p>
+    </div>
+  </header>
+
+  <!-- Barra de Pesquisa -->
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Pesquisar velas...</mat-label>
+      <input 
+        matInput 
+        [(ngModel)]="searchTerm" 
+        (ngModelChange)="onSearchChange($event)"
+        placeholder="Digite o nome, tipo ou aroma da vela">
+      <button 
+        *ngIf="searchTerm" 
+        matSuffix 
+        mat-icon-button 
+        (click)="limparPesquisa()"
+        aria-label="Limpar pesquisa">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Container Principal com Grid de Cards -->
+  <div class="container responsive-grid">
+    @if (cards().length > 0) {
+      @for (card of cards(); track card.idVela ?? $index) {
+        <mat-card class="vela-card" appearance="outlined">
+          
+          <!-- Imagem da vela -->
+          <div class="media-16x9">
+            <img
+              mat-card-image
+              class="media-img"
+              [src]="card.imagemUrl || 'assets/img/velas/default.png'"
+              [alt]="card.nome" />
+          </div>
+
+          <mat-card-header class="header-center">
+            <mat-card-title>{{ card.nome }}</mat-card-title>
+            <mat-card-subtitle>
+              {{ card.tipo }} • {{ card.aroma }}
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p class="preco">R$ {{ card.preco?.toFixed(2) }}</p>
+            
+            @if (card.ritualAssociado) {
+              <p class="ritual"><strong>Ritual:</strong> {{ card.ritualAssociado }}</p>
+            }
+            
+            @if (card.ingrediente) {
+              <p class="ingredientes"><strong>Ingredientes:</strong> {{ card.ingrediente }}</p>
+            }
+            
+            <div class="estoque-disponibilidade">
+              <span class="estoque">Estoque: {{ card.estoque }}</span>
+              <span 
+                class="disponibilidade" 
+                [class.disponivel]="card.disponivel"
+                [class.indisponivel]="!card.disponivel">
+                {{ card.disponivel ? 'Disponível' : 'Indisponível' }}
+              </span>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions align="end">
+            <button mat-button color="primary" (click)="verDetalhes(card)">
+              DETALHES
+            </button>
+            <button 
+              mat-raised-button 
+              color="accent" 
+              (click)="comprarAgora(card)"
+              [disabled]="!card.disponivel || card.estoque === 0">
+              COMPRAR
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    } @else {
+      <div class="no-results">
+        <mat-icon class="no-results-icon">search_off</mat-icon>
+        <h3>Nenhuma vela encontrada</h3>
+        <p>Tente ajustar os termos da sua pesquisa</p>
+        <button mat-raised-button color="primary" (click)="limparPesquisa()">
+          Limpar Pesquisa
+        </button>
+      </div>
+    }
+
+    <!-- Paginação -->
+    <div class="paginator-container">
+      <mat-paginator
+        [length]="totalRecords"
+        [pageSize]="pageSize"
+        [pageIndex]="page"
+        [pageSizeOptions]="[8, 16, 24, 32]"
+        (page)="paginar($event)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>

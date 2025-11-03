@@ -1,28 +1,52 @@
 <h2>Lista de Clientes</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>CPF</th>
-      <th>Telefone</th>
-      <th>Email</th>
-      <th>Endereço</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cliente of clientes">
-      <td>{{ cliente.id }}</td>
-      <td>{{ cliente.nome }}</td>
-      <td>{{ cliente.cpf }}</td>
-      <td>{{ cliente.telefone }}</td>
-      <td>{{ cliente.email }}</td>
-      <td>{{ cliente.endereco }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-container">
+  <table class="clientes-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Email</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.id }}</td>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>{{ cliente.email }}</td>
+        <td class="actions">
+         
+      
+<td class="actions">
+  <button 
+    class="btn btn-danger" 
+    (click)="excluirCliente(cliente.id)"
+    matTooltip="Excluir cliente">
+    <mat-icon>delete</mat-icon>
+  </button>
+</td>
 
-<div *ngIf="clientes.length === 0">
-  <p>Nenhum cliente cadastrado.</p>
+
+  
+       
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<div *ngIf="clientes.length === 0" class="empty-state">
+  <p>Nenhum cliente cadastrado.</p>
+  <button routerLink="/clientes/new" class="btn btn-primary">
+    Cadastrar Primeiro Cliente
+  </button>
+</div>
+
+<mat-paginator
+[pageSizeOptions]="[2, 4, 8, 16]"
+[pageSize]="pageSize"
+[length]="totalRecords"
+(page)="paginar($event)">
+</mat-paginator>

@@ -2,7 +2,8 @@ export class Cliente {
   id!: number;
   nome!: string;
   email!: string;
+  senha!: string;
   telefone!: string;
-  endereco!: string;
-  cpf!: string;
+  role!: string;
+ 
 }

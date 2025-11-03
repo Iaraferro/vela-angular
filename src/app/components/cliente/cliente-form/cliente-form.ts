@@ -3,10 +3,11 @@ import { Cliente } from '../../../models/cliente.model';
 import { FormsModule } from '@angular/forms';
 import { ClienteService } from '../../../services/clienteService';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cliente-form',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './cliente-form.html',
   styleUrl: './cliente-form.css'
 })
@@ -16,8 +17,8 @@ export class ClienteForm {
     nome: '',
     email: '',
     telefone: '',
-    endereco: '',
-    cpf: ''
+    senha: '',
+    role:'CLIENTE'
   };
 
   constructor(
@@ -28,11 +29,14 @@ export class ClienteForm {
   onSubmit(): void {
     this.clienteService.createCliente(this.cliente).subscribe({
       next: () => {
-        this.router.navigate(['/clientes']);
+        this.router.navigate(['/admin/clientes']);
       },
       error: (err) => {
         console.error('Erro ao cadastrar cliente:', err);
       }
     });
+  }
+  cancelar(): void {
+    this.router.navigate(['/admin/clientes']);
   }
 }

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="header-actions">
+    <h2>Lista de Aromas</h2>
+    <a routerLink="/admin/aromas/novo" class="btn-new">
+      + Novo Aroma
+    </a>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="aromas.length === 0 && !isLoading" class="alert alert-info">
+    Nenhum aroma cadastrado. Clique em "Novo Aroma" para adicionar o primeiro.
+  </div>
+
+  <!-- Material Table -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let aroma"> {{aroma.id}} </td>
+    </ng-container>
+
+    <!-- Essência Aromática Column -->
+    <ng-container matColumnDef="essenciaAromatica">
+      <th mat-header-cell *matHeaderCellDef> Essência Aromática </th>
+      <td mat-cell *matCellDef="let aroma"> {{aroma.essenciaAromatica}} </td>
+    </ng-container>
+
+    <!-- Ações Column -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let aroma">
+        <div class="actions">
+          <a 
+            [routerLink]="['/aromas/editar', aroma.id]" 
+            class="btn-edit">
+            Editar
+          </a>
+          <button 
+            type="button" 
+            class="btn btn-danger btn-sm"
+            (click)="deletarAroma(aroma.id!)">
+            Excluir
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Mat Paginator -->
+  <mat-paginator 
+    [pageSizeOptions]="[5, 10, 20]" 
+    showFirstLastButtons 
+    aria-label="Select page of aromas">
+  </mat-paginator>
+</div>
