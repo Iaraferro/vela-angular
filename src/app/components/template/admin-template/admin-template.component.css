@@ -2,17 +2,49 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: #f8f9fa;
 }
 
 .main-content {
   display: flex;
   flex: 1;
   overflow: hidden;
+  position: relative;
 }
 
 .content-area {
   flex: 1;
-  padding: 20px;
+  padding: 24px;
   overflow-y: auto;
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .content-area {
+    padding: 16px;
+  }
+  
+  .main-content {
+    flex-direction: column;
+  }
+}
+
+/* Scrollbar personalizada */
+.content-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content-area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.content-area::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.content-area::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }

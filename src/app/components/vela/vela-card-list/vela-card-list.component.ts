@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { VelaService } from '../../../services/velaService';
 import { Vela } from '../../../models/vela.model';
 import { CommonModule } from '@angular/common';
@@ -37,12 +37,29 @@ type CardVela = {
 export class VelaCardListComponent implements OnInit{
 
   velas: Vela[] = [];
+  allVelas: Vela[] = [];
   cards = signal<CardVela[]>([]);
   totalRecords =0;
   pageSize= 8;
   page = 0;
   searchTerm = '';
   private searchSubject = new Subject<string>();
+
+   filteredCards = computed(() => {
+    const term = this.searchTerm.toLowerCase().trim();
+    if (!term) {
+      return this.cards();
+    }
+    
+    return this.cards().filter(card => 
+      card.nome?.toLowerCase().includes(term) ||
+      card.tipo?.toLowerCase().includes(term) ||
+      card.aroma?.toLowerCase().includes(term) ||
+      card.ritualAssociado?.toLowerCase().includes(term) ||
+      card.ingrediente?.toLowerCase().includes(term)
+    );
+  });
+
   constructor(private velaService: VelaService) {}
 
   ngOnInit(): void {
@@ -51,6 +68,7 @@ export class VelaCardListComponent implements OnInit{
       distinctUntilChanged()
     ).subscribe(term => {
       this.page = 0;
+     
       this.carregarDadosPagina();
     });
       this.carregarDadosPagina();

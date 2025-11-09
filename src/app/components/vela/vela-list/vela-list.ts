@@ -29,32 +29,36 @@ displayedColumns: string[] = ['id', 'nome', 'aroma', 'tipo', 'preco', 'estoque',
   constructor(private velaService: VelaService) {}
 
   ngOnInit(): void {
-    this.velaService.findAll(this.page, this.pageSize).subscribe(data => {
-      this.velas = data;
-      console.log(this.velas);
-    });
-    this.velaService.count().subscribe(data =>{
-      this.totalRecords = data;
-      console.log(this.totalRecords);
-    });
     this.carregarVelas();
   }
 
   paginar(event: PageEvent): void{
     this.page = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.ngOnInit();
+    this.carregarVelas();
   }
 
- 
+
 
   carregarVelas(): void {
-    this.velaService.getVelas().subscribe({
+    this.velaService.findAll(this.page, this.pageSize).subscribe({
       next: (data) => {
         this.velas = data;
+        console.log('Velas carregadas:', this.velas);
+        console.log('Quantidade de itens na página:', this.velas.length);
       },
       error: (err) => {
         console.error('Erro ao carregar velas:', err);
+      }
+    });
+
+      this.velaService.count().subscribe({
+      next: (data) => {
+        this.totalRecords = data;
+        console.log('Total de registros:', this.totalRecords);
+      },
+      error: (err) => {
+        console.error('Erro ao contar registros:', err);
       }
     });
   }

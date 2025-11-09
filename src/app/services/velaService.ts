@@ -18,7 +18,7 @@ export class VelaService {
     if ((page !== undefined) && (pageSize !== undefined)){
       params = {
         page: page.toString(),
-        page_size: pageSize.toString()
+        size: pageSize.toString()
       }
     }
     return this.httpClient.get<Vela[]>(this.baseUrl, {params});

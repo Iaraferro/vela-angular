@@ -1,77 +1,142 @@
 <nav class="sidebar" [class.sidebar-closed]="!(isOpen$ | async)">
   <div class="sidebar-header">
-    <h3>Menu</h3>
+    @if (isOpen$ | async) {
+      <h3>Painel Admin</h3>
+    } @else {
+      <h3>☰</h3>
+    }
   </div>
+  
   <ul class="sidebar-menu">
+    <!-- Velas -->
     <li>
-      <a routerLink="/admin/velas" routerLinkActive="active">
-        <span class="material-icons">candle</span>
+      <a 
+        routerLink="/admin/velas" 
+        routerLinkActive="active" 
+        class="menu-item"
+        [matTooltip]="!(isOpen$ | async) ? 'Velas' : ''"
+        matTooltipPosition="after">
+        <span class="material-icons">🕯️</span>
         <span class="menu-text">Velas</span>
+        @if (isOpen$ | async) {
+          <span class="menu-badge">12</span>
+        }
       </a>
-      <!-- Botão para nova vela -->
       <button 
-          mat-icon-button 
-          routerLink="/admin/velas/novo"
-          class="add-button"
-          title="Nova Vela">
+        mat-icon-button 
+        routerLink="/admin/velas/novo"
+        class="add-button"
+        [matTooltip]="!(isOpen$ | async) ? 'Nova Vela' : ''">
         <span class="material-icons">add</span>
       </button>
     </li>
+
+    <!-- Clientes -->
     <li>
-      <a routerLink="/admin/clientes" routerLinkActive="active">
-        <span class="material-icons">people</span>
+      <a 
+        routerLink="/admin/clientes" 
+        routerLinkActive="active" 
+        class="menu-item"
+        [matTooltip]="!(isOpen$ | async) ? 'Clientes' : ''">
+        <span class="material-icons">👥</span>
         <span class="menu-text">Clientes</span>
+        @if (isOpen$ | async) {
+          <span class="menu-badge">45</span>
+        }
       </a>
-      <!-- Botão para novo cliente -->
       <button 
-          mat-icon-button 
-          routerLink="/admin/clientes/novo"
-          class="add-button"
-          title="Novo Cliente">
+        mat-icon-button 
+        routerLink="/admin/clientes/novo"
+        class="add-button"
+        [matTooltip]="!(isOpen$ | async) ? 'Novo Cliente' : ''">
         <span class="material-icons">add</span>
       </button>
     </li>
+
+    <!-- Fornecedores -->
     <li>
-      <a routerLink="/admin/fornecedores" routerLinkActive="active">
-        <span class="material-icons">business</span>
+      <a 
+        routerLink="/admin/fornecedores" 
+        routerLinkActive="active" 
+        class="menu-item"
+        [matTooltip]="!(isOpen$ | async) ? 'Fornecedores' : ''">
+        <span class="material-icons">🏢</span>
         <span class="menu-text">Fornecedores</span>
       </a>
-      <!-- Botão para novo fornecedor -->
       <button 
-          mat-icon-button 
-          routerLink="/admin/fornecedores/novo"
-          class="add-button"
-          title="Novo Fornecedor">
+        mat-icon-button 
+        routerLink="/admin/fornecedores/novo"
+        class="add-button"
+        [matTooltip]="!(isOpen$ | async) ? 'Novo Fornecedor' : ''">
         <span class="material-icons">add</span>
       </button>
     </li>
+
+    <!-- Ingredientes -->
     <li>
-      <a routerLink="/admin/ingredientes" routerLinkActive="active">
-        <span class="material-icons">science</span>
+      <a 
+        routerLink="/admin/ingredientes" 
+        routerLinkActive="active" 
+        class="menu-item"
+        [matTooltip]="!(isOpen$ | async) ? 'Ingredientes' : ''">
+        <span class="material-icons">🧪</span>
         <span class="menu-text">Ingredientes</span>
       </a>
-      <!-- Botão para novo ingrediente -->
       <button 
-          mat-icon-button 
-          routerLink="/admin/ingredientes/novo"
-          class="add-button"
-          title="Novo Ingrediente">
+        mat-icon-button 
+        routerLink="/admin/ingredientes/novo"
+        class="add-button"
+        [matTooltip]="!(isOpen$ | async) ? 'Novo Ingrediente' : ''">
         <span class="material-icons">add</span>
       </button>
     </li>
+
+    <!-- Aromas -->
     <li>
-      <a routerLink="/admin/aromas" routerLinkActive="active">
-        <span class="material-icons">aroma</span>
+      <a 
+        routerLink="/admin/aromas" 
+        routerLinkActive="active" 
+        class="menu-item"
+        [matTooltip]="!(isOpen$ | async) ? 'Aromas' : ''">
+        <span class="material-icons">🌸</span>
         <span class="menu-text">Aromas</span>
       </a>
-      <!-- Botão para novo aroma -->
       <button 
-          mat-icon-button 
-          routerLink="/admin/aromas/novo"
-          class="add-button"
-          title="Novo Aroma">
+        mat-icon-button 
+        routerLink="/admin/aromas/novo"
+        class="add-button"
+        [matTooltip]="!(isOpen$ | async) ? 'Novo Aroma' : ''">
         <span class="material-icons">add</span>
       </button>
+    </li>
+
+    <!-- Separador -->
+    <li style="margin: 16px 12px;">
+      <div style="height: 1px; background: rgba(255,255,255,0.1);"></div>
+    </li>
+
+    <!-- Relatórios -->
+    <li>
+      <a 
+        routerLink="/admin/relatorios" 
+        routerLinkActive="active" 
+        class="menu-item"
+        [matTooltip]="!(isOpen$ | async) ? 'Relatórios' : ''">
+        <span class="material-icons">📊</span>
+        <span class="menu-text">Relatórios</span>
+      </a>
+    </li>
+
+    <!-- Configurações -->
+    <li>
+      <a 
+        routerLink="/admin/configuracoes" 
+        routerLinkActive="active" 
+        class="menu-item"
+        [matTooltip]="!(isOpen$ | async) ? 'Configurações' : ''">
+        <span class="material-icons">settings</span>
+        <span class="menu-text">Configurações</span>
+      </a>
     </li>
   </ul>
 </nav>
